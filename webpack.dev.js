@@ -40,6 +40,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/index.html",
     }),
-    new Dotenv(), // Добавляем плагин Dotenv
+    new Dotenv({
+      systemvars: true, // Включаем доступ к системным переменным окружения
+    }),
   ],
 };

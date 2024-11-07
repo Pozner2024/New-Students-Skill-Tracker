@@ -70,7 +70,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",
     }),
-    new Dotenv(), // Добавляем плагин Dotenv
+    new Dotenv({
+      systemvars: true, // Включаем доступ к системным переменным окружения
+    }),
   ],
   devtool: "source-map",
 };
