@@ -10,7 +10,7 @@ module.exports = {
   },
   plugins: [
     new Dotenv({
-      path: path.resolve(__dirname, "StudentSkillTracker/.env"), // Указываем точный путь к .env файлу
+      path: path.resolve(__dirname, ".env"),
     }),
   ],
   devtool: false, // Отключаем карты исходного кода
