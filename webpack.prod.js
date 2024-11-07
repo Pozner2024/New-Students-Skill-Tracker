@@ -4,7 +4,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const Dotenv = require("dotenv-webpack"); // Импортируем dotenv-webpack
+const Dotenv = require("dotenv-webpack");
+const CopyWebpackPlugin = require("copy-webpack-plugin"); // Импортируем CopyWebpackPlugin
 
 module.exports = {
   mode: "production",
@@ -73,6 +74,14 @@ module.exports = {
     new Dotenv({
       systemvars: true, // Включаем доступ к системным переменным окружения
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "_redirects"),
+          to: path.resolve(__dirname, "dist"),
+        },
+      ],
+    }), // Добавляем плагин для копирования файла _redirects
   ],
   devtool: "source-map",
 };

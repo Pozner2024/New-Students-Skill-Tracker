@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const Dotenv = require("dotenv-webpack"); // Импортируем dotenv-webpack
+const Dotenv = require("dotenv-webpack");
+const CopyWebpackPlugin = require("copy-webpack-plugin"); // Импортируем CopyWebpackPlugin
 
 module.exports = {
   mode: "development",
@@ -18,7 +19,7 @@ module.exports = {
     port: 9000,
     hot: true,
     open: true,
-    historyApiFallback: true, // for SPA
+    historyApiFallback: true, // для SPA
   },
   module: {
     rules: [
@@ -43,5 +44,13 @@ module.exports = {
     new Dotenv({
       systemvars: true, // Включаем доступ к системным переменным окружения
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "_redirects"),
+          to: path.resolve(__dirname, "dist"),
+        },
+      ],
+    }), // Добавляем плагин CopyWebpackPlugin для копирования файла _redirects
   ],
 };
