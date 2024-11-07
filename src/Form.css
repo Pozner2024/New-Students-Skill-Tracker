@@ -1,0 +1,115 @@
+/* Применяем стили только если элемент находится в контейнере с классом .login-page */
+.login-page {
+  height: 100vh; /* Занимает всю высоту экрана */
+  width: 100vw; /* Занимает всю ширину экрана */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-page .page-background {
+  position: absolute; /* Абсолютное позиционирование для растяжения на весь экран */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh; /* Высота 100% вьюпорта */
+  width: 100vw; /* Ширина 100% вьюпорта */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("./assets/background.jpg"); /* Добавляем фон здесь */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.login-page .main-container {
+  background-color: #4f2568; /* Фиолетовый цвет для основного контейнера */
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 1),
+    inset 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.login-page .text-section {
+  width: 50%;
+  padding-right: 40px;
+  font-weight: bold;
+  color: white; /* Белый текст для текстовой секции */
+  text-align: center;
+}
+.login-page .text-section h1 {
+  font-size: 32px;
+  margin-top: 30px;
+}
+
+.login-page .text-section p {
+  font-size: 18px;
+  margin: 0;
+  margin-top: 40px;
+}
+.login-wrapper {
+  width: 45%;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-box h2 {
+  margin-bottom: 20px;
+  color: #a259ff; /* Фиолетовый цвет заголовка */
+  text-align: center; /* Центрирование заголовка */
+}
+
+.login-page .input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.login-page .input-group label {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.login-page .input-group input[type="email"],
+.login-page .input-group input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  margin-bottom: 15px;
+}
+
+.login-page .submit-btn {
+  background-color: #4caf50; /* Зеленый цвет кнопки */
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.login-page .submit-btn:hover {
+  background-color: #45a049; /* Более тёмный зелёный цвет при наведении */
+}
+
+.login-page .logo {
+  margin-top: -80px;
+  height: 80px;
+  width: auto;
+}
