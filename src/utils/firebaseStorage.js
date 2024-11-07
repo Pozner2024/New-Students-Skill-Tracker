@@ -17,12 +17,15 @@ const firebaseConfig = {
   messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.FIREBASE_APP_ID,
   measurementId: process.env.FIREBASE_MEASUREMENT_ID,
+  testVariable: process.env.FIREBASE_TEST_VARIABLE,
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app); // Initialize the Realtime Database
 const auth = getAuth(app); // Initialize authentication
+
+console.log("Firebase Test Variable:", firebaseConfig.testVariable);
 
 // Function for user sign-in
 export function signInUser(email, password) {
