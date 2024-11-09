@@ -1,6 +1,6 @@
 const Dotenv = require("dotenv-webpack");
 const path = require("path");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin"); // Импортируем CopyWebpackPlugin
 
 module.exports = {
   mode: "development", // или "production"
@@ -13,7 +13,7 @@ module.exports = {
   plugins: [
     new Dotenv({
       path: path.resolve(__dirname, ".env"), // Указываем путь к файлу .env
-      systemvars: true, // Загружаем системные переменные окружения
+      systemvars: true, // Добавляем systemvars: true, чтобы загружать системные переменные окружения
     }),
     new CopyWebpackPlugin({
       patterns: [
@@ -22,18 +22,7 @@ module.exports = {
           to: path.resolve(__dirname, "dist"),
         },
       ],
-    }), // Плагин для копирования файла _redirects
+    }), // Добавляем плагин для копирования файла _redirects
   ],
-  module: {
-    rules: [
-      {
-        test: /\.(png|jpg|jpeg|gif|svg)$/i, // Форматы изображений
-        type: "asset/resource", // Используем встроенный механизм Webpack 5 для загрузки ресурсов
-        generator: {
-          filename: "images/[name][ext]", // Куда сохранять файлы
-        },
-      },
-    ],
-  },
   devtool: false, // Отключаем карты исходного кода
 };
