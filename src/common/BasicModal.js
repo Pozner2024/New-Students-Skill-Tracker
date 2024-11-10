@@ -1,3 +1,5 @@
+import background from "../assets/background.jpg"; // Импортируем фон
+
 export default class BasicModal {
   constructor({
     id = "basicModal",
@@ -29,6 +31,15 @@ export default class BasicModal {
     // Проверяем, есть ли уже модальное окно в DOM
     if (!document.getElementById(this.id)) {
       document.body.insertAdjacentHTML("beforeend", this.render());
+    }
+
+    // Устанавливаем фоновое изображение для .modal-content через JavaScript
+    const modalContent = document.querySelector(`#${this.id} .modal-content`);
+    if (modalContent) {
+      modalContent.style.backgroundImage = `url(${background})`;
+      modalContent.style.backgroundSize = "cover";
+      modalContent.style.backgroundPosition = "center";
+      modalContent.style.backgroundRepeat = "no-repeat";
     }
 
     // Заполняем контейнер модального окна динамическим контентом
