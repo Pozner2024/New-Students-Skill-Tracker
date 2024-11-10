@@ -7,6 +7,7 @@ import {
 } from "../utils/firebaseStorage";
 import CubeLoader from "../common/CubeLoader";
 import logo from "../assets/logo_vgik.png";
+import background from "../assets/background.jpg"; // Импортируем фон
 
 // Функция для рендеринга страницы логина
 export function renderLoginPage() {
@@ -46,6 +47,13 @@ export function renderLoginPage() {
       </div>
     </div>
   `;
+
+  // Устанавливаем фон через JavaScript
+  const pageBackground = document.querySelector(".page-background");
+  pageBackground.style.backgroundImage = `url(${background})`; // Устанавливаем фон
+  pageBackground.style.backgroundSize = "cover";
+  pageBackground.style.backgroundPosition = "center";
+  pageBackground.style.backgroundRepeat = "no-repeat";
 
   // Создаем экземпляр лоадера
   const loader = new CubeLoader();

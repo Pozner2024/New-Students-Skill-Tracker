@@ -8,20 +8,16 @@
 }
 
 .login-page .page-background {
-  position: absolute; /* Абсолютное позиционирование для растяжения на весь экран */
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 100vh; /* Высота 100% вьюпорта */
-  width: 100vw; /* Ширина 100% вьюпорта */
+  height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("./assets/background.jpg"); /* Добавляем фон здесь */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .login-page .main-container {

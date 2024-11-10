@@ -11,7 +11,7 @@
   z-index: 100;
 }
 .modal-content {
-  background-image: url("${background}");
+  background-image: url("./assets/background.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
