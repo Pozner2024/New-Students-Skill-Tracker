@@ -24,7 +24,10 @@ class ImageLoader {
         if (fileName.includes(`img${this.topicId}_${this.variant}/`)) {
           // Извлекаем номер вопроса из имени файла, например, `1.jpg` -> 1
           const questionNumber = parseInt(fileName.match(/(\d+)\./)[1], 10);
-          imageMap[questionNumber] = images(fileName);
+
+          // Используем .default, чтобы получить строку пути, если она доступна
+          imageMap[questionNumber] =
+            images(fileName).default || images(fileName);
         }
       });
 
