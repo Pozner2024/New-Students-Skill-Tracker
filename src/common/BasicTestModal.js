@@ -1,3 +1,5 @@
+import background from "../assets/background.jpg"; // Импортируем фон
+
 export default class BasicTestModal {
   constructor({
     id = "basicTestModal",
@@ -18,14 +20,14 @@ export default class BasicTestModal {
   // Метод для рендеринга модального окна
   render() {
     return `
-        <div id="${this.id}" class="${this.customClass}">
-          <div class="modal-content">
-            <button id="${this.id}-closeModal" class="close-button">×</button>
-            <div class="modal-body"></div>
-            <button id="${this.id}-actionButton" class="action-button">${this.buttonText}</button> <!-- Кнопка внизу окна -->
-          </div>
+      <div id="${this.id}" class="${this.customClass}">
+        <div class="modal-content">
+          <button id="${this.id}-closeModal" class="close-button">×</button>
+          <div class="modal-body"></div>
+          <button id="${this.id}-actionButton" class="action-button">${this.buttonText}</button> <!-- Кнопка внизу окна -->
         </div>
-      `;
+      </div>
+    `;
   }
 
   // Метод для отображения модального окна с контентом
@@ -33,6 +35,15 @@ export default class BasicTestModal {
     // Проверяем, есть ли уже модальное окно в DOM
     if (!document.getElementById(this.id)) {
       document.body.insertAdjacentHTML("beforeend", this.render());
+    }
+
+    // Устанавливаем фоновое изображение для .modal-content через JavaScript
+    const modalContent = document.querySelector(`#${this.id} .modal-content`);
+    if (modalContent) {
+      modalContent.style.backgroundImage = `url(${background})`;
+      modalContent.style.backgroundSize = "cover";
+      modalContent.style.backgroundPosition = "center";
+      modalContent.style.backgroundRepeat = "no-repeat";
     }
 
     // Заполняем контейнер модального окна динамическим контентом
