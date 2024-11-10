@@ -1,10 +1,7 @@
-// // Класс TestPage представляет собой компонент веб-приложения для отображения страницы с
-// // тестовыми вопросами. Он включает в себя структуру страницы, заголовок, навигацию
-// //  по вопросам и обработку загрузки данных.
-
 import TestQuestion from "../components/TestQuestion";
 import Pagination from "../components/Pagination";
 import CubeLoader from "../common/CubeLoader"; // Импортируем CubeLoader
+import background from "../assets/background1.jpg"; // Импортируем фон
 
 class TestPage {
   constructor({
@@ -28,20 +25,20 @@ class TestPage {
 
     return `
       <main id="${this.id}" class="container">
-  <div class="test-page-styles">
-    <div class="test-info">
-      <h2>${title}</h2>
-      <p>Вариант: ${variant}</p>
-    </div>
-    <div id="indicator-panel" class="indicator-panel"></div>
-    <div id="questions-panel" class="questions-panel"></div>
-    <div class="navigation-panel">
-      <button id="prevButton" class="nav-button">Назад</button>
-      <button id="nextButton" class="nav-button">Вперед</button>
-      <button id="finishButton" class="nav-button finish-button">Завершить тест и показать результаты теста</button>
-    </div>
-  </div> <!-- Закрывающий тег для test-page-styles -->
-</main>
+        <div class="test-page-styles">
+          <div class="test-info">
+            <h2>${title}</h2>
+            <p>Вариант: ${variant}</p>
+          </div>
+          <div id="indicator-panel" class="indicator-panel"></div>
+          <div id="questions-panel" class="questions-panel"></div>
+          <div class="navigation-panel">
+            <button id="prevButton" class="nav-button">Назад</button>
+            <button id="nextButton" class="nav-button">Вперед</button>
+            <button id="finishButton" class="nav-button finish-button">Завершить тест и показать результаты теста</button>
+          </div>
+        </div> <!-- Закрывающий тег для test-page-styles -->
+      </main>
     `;
   }
 
@@ -58,6 +55,15 @@ class TestPage {
     document.title = this.metaTitle;
     if (contentElement) {
       contentElement.innerHTML = this.renderPageStructure(title, variant);
+
+      // Устанавливаем фоновое изображение через JS
+      const testPageStyles = contentElement.querySelector(".test-page-styles");
+      if (testPageStyles) {
+        testPageStyles.style.backgroundImage = `url(${background})`;
+        testPageStyles.style.backgroundSize = "cover";
+        testPageStyles.style.backgroundPosition = "center";
+        testPageStyles.style.backgroundRepeat = "no-repeat";
+      }
     }
   }
 

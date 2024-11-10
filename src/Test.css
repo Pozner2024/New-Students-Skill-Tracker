@@ -1,13 +1,9 @@
 /* Основной стиль страницы */
 .test-page-styles {
-  background-image: url("./assets/background1.jpg"); /* Путь к фоновому изображению */
-  background-size: cover; /* Изображение будет покрывать весь блок */
-  background-position: center; /* Центрирование изображения */
-  background-repeat: no-repeat; /* Отключаем повторение изображения */
   color: black;
   padding: 20px;
   border-radius: 5px;
-  height: auto; /* Автоматическая высота */
+  height: auto;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
