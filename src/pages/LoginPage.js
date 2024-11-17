@@ -48,7 +48,8 @@ export function renderLoginPage() {
     </div>
   `;
 
-  // Устанавливаем фон через JavaScript
+  // Устанавливаем фон через JavaScript. Пришлось вынести фон из CSS в JS, т.к. при деплое,
+  // в первом случае (через СSS, он не отображался на Netlify
   const pageBackground = document.querySelector(".page-background");
   pageBackground.style.backgroundImage = `url(${background})`; // Устанавливаем фон
   pageBackground.style.backgroundSize = "cover";

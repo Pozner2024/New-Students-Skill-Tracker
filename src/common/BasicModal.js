@@ -33,7 +33,8 @@ export default class BasicModal {
       document.body.insertAdjacentHTML("beforeend", this.render());
     }
 
-    // Устанавливаем фоновое изображение для .modal-content через JavaScript
+    // Устанавливаем фон через JavaScript. Пришлось вынести фон из CSS в JS, т.к. при деплое,
+    // в первом случае (через СSS, он не отображался на Netlify
     const modalContent = document.querySelector(`#${this.id} .modal-content`);
     if (modalContent) {
       modalContent.style.backgroundImage = `url(${background})`;

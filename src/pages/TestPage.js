@@ -56,7 +56,8 @@ class TestPage {
     if (contentElement) {
       contentElement.innerHTML = this.renderPageStructure(title, variant);
 
-      // Устанавливаем фоновое изображение через JS
+      // Устанавливаем фон через JavaScript. Пришлось вынести фон из CSS в JS, т.к. при деплое,
+      // в первом случае (через СSS, он не отображался на Netlify
       const testPageStyles = contentElement.querySelector(".test-page-styles");
       if (testPageStyles) {
         testPageStyles.style.backgroundImage = `url(${background})`;
