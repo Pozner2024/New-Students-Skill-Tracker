@@ -17,3 +17,47 @@ model Tests {
 
   @@map("tests")
 }
+
+model TestImages {
+  id         Int      @id @default(autoincrement())
+  test_code  String   @db.VarChar(20)
+  variant    Int
+  topic_id   Int
+  image_url  String?  // URL изображения из Yandex Cloud
+  created_at DateTime @default(now()) @db.Timestamp(6)
+  updated_at DateTime @updatedAt @db.Timestamp(6)
+
+  @@unique([test_code, variant, topic_id])
+  @@map("test_images")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique @db.VarChar(255)
+  password     String   @db.VarChar(255)
+  fullName     String?  @db.VarChar(255)
+  groupNumber  String?  @db.VarChar(50)
+  created_at   DateTime @default(now()) @db.Timestamp(6)
+  updated_at   DateTime @updatedAt @db.Timestamp(6)
+
+  // Связь с результатами тестов
+  testResults  TestResult[]
+
+  @@map("users")
+}
+
+model TestResult {
+  id           Int      @id @default(autoincrement())
+  user_id      Int
+  test_code    String   @db.VarChar(20)
+  variant      Int
+  score        Int      // Количество правильных ответов
+  total_questions Int   // Общее количество вопросов
+  percentage   Float    // Процент правильных ответов
+  completed_at DateTime @default(now()) @db.Timestamp(6)
+  
+  // Связь с пользователем
+  user         User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("test_results")
+}

@@ -3,9 +3,16 @@ import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
+  private isConnected = false;
+
   async onModuleInit() {
+    if (this.isConnected) {
+      return; // Уже подключен, не подключаемся повторно
+    }
+
     try {
       await this.$connect();
+      this.isConnected = true;
       console.log('✅ Database connected successfully');
     } catch (error) {
       if (error instanceof Error) {

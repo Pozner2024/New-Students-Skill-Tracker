@@ -4,11 +4,15 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { ImagesService } from '../images/images.service';
 import { TestResponseDto, CreateTestDto } from './dto/test.dto';
 
 @Injectable()
 export class TestsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private imagesService: ImagesService,
+  ) {}
 
   async getTestByCodeAndVariant(
     testCode: string,
@@ -140,6 +144,27 @@ export class TestsService {
       variant: test.variant,
       questions: test.questions,
       createdAt: test.created_at,
+    };
+  }
+
+  /**
+   * Получает тест с изображениями для каждого вопроса
+   */
+  async getTestWithImages(
+    testCode: string,
+    variant: number,
+  ): Promise<TestResponseDto & { images: Record<number, string> }> {
+    const test = await this.getTestByCodeAndVariant(testCode, variant);
+
+    // Извлекаем topic_id из test_code (например, test1_1 -> 1)
+    const topicId = parseInt(testCode.replace('test', '').split('_')[0], 10);
+
+    // Получаем все изображения для данной темы и варианта
+    const images = await this.imagesService.getImagesForTopic(topicId, variant);
+
+    return {
+      ...test,
+      images,
     };
   }
 }

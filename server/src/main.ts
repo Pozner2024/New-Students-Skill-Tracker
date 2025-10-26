@@ -20,9 +20,14 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
 
   // ✅ Разрешаем CORS
+  const loggedOrigins = new Set(); // Кэш для предотвращения повторных логов
+
   app.enableCors({
     ...corsConfig,
-    origin: (origin, callback) => {
+    origin: (
+      origin: string | undefined,
+      callback: (err: Error | null, allow?: boolean) => void,
+    ) => {
       const allowedOrigins = [
         'http://localhost:8080',
         'http://localhost:3000',
@@ -35,15 +40,24 @@ async function bootstrap() {
       ];
 
       if (!origin) {
-        console.log('🌐 No origin (likely Postman or curl)');
+        if (!loggedOrigins.has('no-origin')) {
+          console.log('🌐 No origin (likely Postman or curl)');
+          loggedOrigins.add('no-origin');
+        }
         return callback(null, true);
       }
 
       if (allowedOrigins.some((o) => origin.startsWith(o))) {
-        console.log(`🟢 CORS allowed for: ${origin}`);
+        if (!loggedOrigins.has(origin)) {
+          console.log(`🟢 CORS allowed for: ${origin}`);
+          loggedOrigins.add(origin);
+        }
         callback(null, true);
       } else {
-        console.warn(`🚫 CORS blocked for: ${origin}`);
+        if (!loggedOrigins.has(origin)) {
+          console.warn(`🚫 CORS blocked for: ${origin}`);
+          loggedOrigins.add(origin);
+        }
         callback(new Error(`Not allowed by CORS: ${origin}`));
       }
     },
@@ -53,7 +67,8 @@ async function bootstrap() {
   const port = process.env.PORT ?? 5000;
   await app.listen(port);
 
-  console.log(`🚀 Server running on http://localhost:${port}`);
+  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Client running on http://localhost:9000`);
 }
 
 // ✅ Без ошибок ESLint: ловим ошибки при старте

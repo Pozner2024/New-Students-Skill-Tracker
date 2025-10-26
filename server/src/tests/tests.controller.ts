@@ -53,6 +53,16 @@ export class TestsController {
     );
   }
 
+  @Get('test-with-images')
+  async getTestWithImages(
+    @Query(ValidationPipe) getTestDto: GetTestDto,
+  ): Promise<TestResponseDto & { images: Record<number, string> }> {
+    return this.testsService.getTestWithImages(
+      getTestDto.testCode,
+      getTestDto.variant,
+    );
+  }
+
   @Get('code/:testCode')
   async getTestsByCode(
     @Param('testCode') testCode: string,
